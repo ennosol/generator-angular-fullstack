@@ -24,7 +24,7 @@ describe('<%= name %>s endpoint', function () {
         });
     });
 
-    it('should respond with JSON array', function (done) {
+    it('should respond with an empty JSON array', function (done) {
         request(app)
             .get('/api/<%= name%>s' + token)
             .expect(200)
@@ -40,12 +40,37 @@ describe('<%= name %>s endpoint', function () {
     it('should create a new <%= name %>', function (done) {
         request(app)
             .post('/api/<%= name%>s' + token)
-            .send()
+            .send({
+                name: 'Test name',
+                age: 30,
+                living: true,
+                mixed: {
+                    any: {
+                        thing: 'i want'
+                    }
+                },
+                array: [1],
+                ofString: ["strings!"],
+                ofNumber: [1, 2, 3, 4],
+                ofMixed: [1, [], 'three', {
+                    four: 5
+                }],
+                nested: {
+                    stuff: 'Good '
+                }
+            })
             .expect(201)
             .expect('Content-Type', /json/)
             .end(function (err, res) {
                 if (err) return done(err);
                 res.body.should.have.property('_id');
+                res.body.should.have.property('name', 'Test name');
+                res.body.should.have.property('living', true);
+                res.body.should.have.properties({
+                    "nested": {
+                        "stuff": "good"
+                    }
+                });
                 id = res.body._id;
                 done();
             });
@@ -54,12 +79,25 @@ describe('<%= name %>s endpoint', function () {
     it('should update a <%= name %>', function (done) {
         request(app)
             .put('/api/<%= name%>s/' + id + token)
-            .send({})
+            .send({
+                name: 'Test name updated',
+                age: 40,
+                nested: {
+                    stuff: 'bad'
+                }
+            })
             .expect(200)
             .expect('Content-Type', /json/)
             .end(function (err, res) {
                 if (err) return done(err);
-                res.body.should.have.property('_id');
+                res.body.should.have.property('_id', id);
+                res.body.should.have.property('name', 'Test name updated');
+                res.body.should.have.property('living', true);
+                res.body.should.have.properties({
+                    "nested": {
+                        "stuff": "bad"
+                    }
+                });
                 done();
             });
     });
@@ -71,7 +109,14 @@ describe('<%= name %>s endpoint', function () {
             .expect('Content-Type', /json/)
             .end(function (err, res) {
                 if (err) return done(err);
-                res.body.should.have.property('_id');
+                res.body.should.have.property('_id', id);
+                res.body.should.have.property('name', 'Test name updated');
+                res.body.should.have.property('living', true);
+                res.body.should.have.properties({
+                    "nested": {
+                        "stuff": "bad"
+                    }
+                });
                 done();
             });
     });
