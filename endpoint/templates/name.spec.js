@@ -41,17 +41,17 @@ describe('<%= name %>s endpoint', function () {
         request(app)
             .post('/api/<%= name%>s' + token)
             .send({
-                name: 'Test name',
+                string: 'Test string',
                 age: 30,
-                living: true,
+                boolean: true,
                 mixed: {
-                    any: {
-                        thing: 'i want'
+                    a: {
+                        b: 's',
+                        c: true
                     }
                 },
                 array: [1],
-                ofString: ["strings!"],
-                ofNumber: [1, 2, 3, 4],
+                ofString: ["String1", "String2"],
                 ofMixed: [1, [], 'three', {
                     four: 5
                 }],
@@ -64,8 +64,8 @@ describe('<%= name %>s endpoint', function () {
             .end(function (err, res) {
                 if (err) return done(err);
                 res.body.should.have.property('_id');
-                res.body.should.have.property('name', 'Test name');
-                res.body.should.have.property('living', true);
+                res.body.should.have.property('string', 'Test string');
+                res.body.should.have.property('boolean', true);
                 res.body.should.have.properties({
                     "nested": {
                         "stuff": "good"
@@ -80,7 +80,7 @@ describe('<%= name %>s endpoint', function () {
         request(app)
             .put('/api/<%= name%>s/' + id + token)
             .send({
-                name: 'Test name updated',
+                string: 'Test string updated',
                 age: 40,
                 nested: {
                     stuff: 'bad'
@@ -91,8 +91,8 @@ describe('<%= name %>s endpoint', function () {
             .end(function (err, res) {
                 if (err) return done(err);
                 res.body.should.have.property('_id', id);
-                res.body.should.have.property('name', 'Test name updated');
-                res.body.should.have.property('living', true);
+                res.body.should.have.property('string', 'Test string updated');
+                res.body.should.have.property('boolean', true);
                 res.body.should.have.properties({
                     "nested": {
                         "stuff": "bad"
@@ -110,8 +110,8 @@ describe('<%= name %>s endpoint', function () {
             .end(function (err, res) {
                 if (err) return done(err);
                 res.body.should.have.property('_id', id);
-                res.body.should.have.property('name', 'Test name updated');
-                res.body.should.have.property('living', true);
+                res.body.should.have.property('string', 'Test string updated');
+                res.body.should.have.property('boolean', true);
                 res.body.should.have.properties({
                     "nested": {
                         "stuff": "bad"
