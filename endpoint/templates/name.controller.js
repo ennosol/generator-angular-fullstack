@@ -20,7 +20,7 @@ exports.show = function (req, res) {
             return handleError(res, err);
         }
         if (!<%= name %>) {
-            return res.status(404).send('Not Found');
+            return res.status(404).json('Not Found');
         }
         return res.json(<%= name %>);
     });
@@ -46,7 +46,7 @@ exports.update = function (req, res) {
             return handleError(res, err);
         }
         if (!<%= name %>) {
-            return res.status(404).send('Not Found');
+            return res.status(404).json('Not Found');
         }
         var updated = _.merge(<%= name %>, req.body);
         updated.save(function (err) {
@@ -65,17 +65,17 @@ exports.destroy = function (req, res) {
             return handleError(res, err);
         }
         if (!<%= name %>) {
-            return res.status(404).send('Not Found');
+            return res.status(404).json('Not Found');
         }
         <%= name %>.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(204).send('No Content');
+            return res.status(204).json('No Content');
         });
     });
 };
 
 function handleError(res, err) {
-    return res.status(500).send(err);
+    return res.status(500).json(err);
 }
