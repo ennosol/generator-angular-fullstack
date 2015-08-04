@@ -1,25 +1,22 @@
 {
-    "name": "String",
+    "string": "String",
     "binary": "Buffer",
-    "living": "Boolean",
+    "boolean": "Boolean",
     "updated": {
-        "type": "Date"
+        "type": "Date",
+        "default": "Tue Aug 04 2015 16:47:28 GMT+0200 (CEST)"
     },
     "age": {
         "type": "Number",
         "min": 18,
-        "max": 65
+        "max": 65,
+        "required": true
     },
     "mixed": "Mixed",
     "_someId": "ObjectId",
     "array": [],
     "ofString": ["String"],
-    "ofNumber": ["Number"],
-    "ofDates": ["Date"],
-    "ofBuffer": ["Buffer"],
-    "ofBoolean": ["Boolean"],
     "ofMixed": ["Mixed"],
-    "ofObjectId": ["ObjectId"],
     "nested": {
         "stuff": {
             "type": "String",
