@@ -54,15 +54,16 @@ Generator.prototype.registerEndpoint = function registerEndpoint() {
     };
     ngUtil.rewriteFile(routeConfig);
 
-    var rolesUserConfig = {
+    var rolesConfig = {
       file: this.config.get('configRolesFile'),
-      needle: this.config.get('configUserRolesNeedle'),
+      needle: this.config.get('configRolesNeedle'),
       splicable: [
         "'" + this.name + "s-index', '" + this.name + "s-show', '" + this.name + "s-update', '" +
           this.name + "s-create', '" + this.name + "s-destroy',"
-      ]
+      ],
+      all: true
     };
-    ngUtil.rewriteFile(rolesUserConfig);
+    ngUtil.rewriteFile(rolesConfig);
   }
 };
 
