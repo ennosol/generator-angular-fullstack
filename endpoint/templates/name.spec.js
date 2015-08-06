@@ -42,7 +42,7 @@ describe('<%= name %>s endpoint', function () {
             .post('/api/<%= name%>s' + token)
             .send({
                 string: 'Test string',
-                age: 30,
+                age: 20,
                 boolean: true,
                 mixed: {
                     a: {
@@ -66,6 +66,7 @@ describe('<%= name %>s endpoint', function () {
                 res.body.should.have.property('_id');
                 res.body.should.have.property('string', 'Test string');
                 res.body.should.have.property('boolean', true);
+                res.body.should.have.property('age', 20);
                 res.body.should.have.properties({
                     "nested": {
                         "stuff": "good"
@@ -81,7 +82,7 @@ describe('<%= name %>s endpoint', function () {
             .put('/api/<%= name%>s/' + id + token)
             .send({
                 string: 'Test string updated',
-                age: 40,
+                age: 22,
                 nested: {
                     stuff: 'bad'
                 }
@@ -93,6 +94,7 @@ describe('<%= name %>s endpoint', function () {
                 res.body.should.have.property('_id', id);
                 res.body.should.have.property('string', 'Test string updated');
                 res.body.should.have.property('boolean', true);
+                res.body.should.have.property('age', 22);
                 res.body.should.have.properties({
                     "nested": {
                         "stuff": "bad"
