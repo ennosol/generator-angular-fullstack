@@ -1,16 +1,64 @@
 {
-    "string": "String",
-    "binary": "Buffer",
-    "boolean": "Boolean",
+    "string": {
+        "type": "String",
+        "formly": {
+            "key": "string",
+            "type": "input",
+            "templateOptions": {
+                "label": "Formly input text",
+                "placeholder": "Formly input text"
+            }
+        }
+    },
+    "binary": {
+        "type": "Buffer"
+    },
+    "boolean": {
+        "type": "Boolean",
+        "formly": {
+            "key": "boolean",
+            "type": "checkbox",
+            "templateOptions": {
+                "label": "Formly checkbox"
+            }
+        }
+    },
     "updated": {
         "type": "Date",
-        "default": "Tue Aug 04 2015 16:47:28 GMT+0200 (CEST)"
+        "default": "Tue Aug 04 2015 16:47:28 GMT+0200 (CEST)",
+        "formly": {
+            "key": "updated",
+            "type": "input",
+            "defaultValue": "Tue Aug 04 2015 16:47:28 GMT+0200 (CEST)",
+            "templateOptions": {
+                "label": "Updated date",
+                "placeholder": "Formly input text"
+            }
+        }
     },
     "age": {
         "type": "Number",
         "min": 18,
-        "max": 65,
-        "required": true
+        "max": 25,
+        "required": true,
+        "formly": {
+            "key": "age",
+            "type": "select",
+            "templateOptions": {
+                "required": true,
+                "label": "Age - Formly select",
+                "options": [
+                    {"name": "18", "value": 18},
+                    {"name": "19", "value": 19},
+                    {"name": "20", "value": 20},
+                    {"name": "21", "value": 21},
+                    {"name": "22", "value": 22},
+                    {"name": "23", "value": 23},
+                    {"name": "24", "value": 24},
+                    {"name": "25", "value": 25}
+                ]
+            }
+        }
     },
     "mixed": "Mixed",
     "_someId": "ObjectId",
