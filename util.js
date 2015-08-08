@@ -134,6 +134,9 @@ function processDirectory (self, source, destination) {
     if(self.name) {
       filteredFile.name = filteredFile.name.replace('name', self.name);
     }
+    if(self.pluralName) {
+      filteredFile.name = filteredFile.name.replace('pluralName', self.pluralName);
+    }
     var name = filteredFile.name;
     var copy = false, stripped;
 
