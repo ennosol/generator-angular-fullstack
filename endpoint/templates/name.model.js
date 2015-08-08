@@ -8,7 +8,7 @@ var mongooseTimestamp = require('mongoose-timestamp');
 // Model dependencies
 
 // Schema
-var schema = new mongoose.Schema(require('./../../../shared/models/<%= name%>s.json'));
+var schema = new mongoose.Schema(require('./../../../shared/models/<%= pluralName%>.json'));
 
 // Schema plugins
 schema.plugin(mongooseDelete, {

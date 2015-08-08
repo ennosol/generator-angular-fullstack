@@ -14,22 +14,23 @@ util.inherits(Generator, ScriptBase);
 Generator.prototype.askFor = function askFor() {
   var done = this.async();
   var name = this.name;
+  var pluralName = this.pluralName;
 
   var base = this.config.get('routesBase') || '/api/';
   if (base.charAt(base.length - 1) !== '/') {
     base = base + '/';
   }
 
-  // pluralization defaults to true for backwards compat
-  if (this.config.get('pluralizeRoutes') !== false) {
-    name = name + 's';
-  }
-
   var prompts = [
+    {
+      name: 'pluralName',
+      message: 'What will the plural name of your endpoint be?',
+      default: name + 's'
+    },
     {
       name: 'route',
       message: 'What will the url of your endpoint be?',
-      default: base + name
+      default: base + name + 's'
     }
   ];
 
@@ -39,6 +40,7 @@ Generator.prototype.askFor = function askFor() {
     }
 
     this.route = props.route;
+    this.pluralName = props.pluralName;
     done();
   }.bind(this));
 };
@@ -58,8 +60,8 @@ Generator.prototype.registerEndpoint = function registerEndpoint() {
       file: this.config.get('configRolesFile'),
       needle: this.config.get('configRolesNeedle'),
       splicable: [
-        "'" + this.name + "s-index', '" + this.name + "s-show', '" + this.name + "s-update', '" +
-          this.name + "s-create', '" + this.name + "s-destroy',"
+        "'" + this.pluralName + "-index', '" + this.pluralName + "-show', '" + this.pluralName + "-update', '" +
+          this.pluralName + "-create', '" + this.pluralName + "-destroy',"
       ],
       all: true
     };

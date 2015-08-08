@@ -6,7 +6,7 @@ var request = require('supertest');
 var test = require('../../test');
 var <%= name %> = require('./<%= name %>.model');
 
-describe('<%= name %>s endpoint', function() {
+describe('<%= pluralName %> endpoint', function() {
 
     var id = 0;
     var token = '';
@@ -26,7 +26,7 @@ describe('<%= name %>s endpoint', function() {
 
     it('should respond with an empty JSON array', function(done) {
         request(app)
-            .get('/api/<%= name%>s' + token)
+            .get('/api/<%= pluralName%>' + token)
             .expect(200)
             .expect('Content-Type', /json/)
             .end(function(err, res) {
@@ -39,7 +39,7 @@ describe('<%= name %>s endpoint', function() {
 
     it('should create a new <%= name %>', function(done) {
         request(app)
-            .post('/api/<%= name%>s' + token)
+            .post('/api/<%= pluralName%>' + token)
             .send({
                 string: 'Test string',
                 age: 20,
@@ -79,7 +79,7 @@ describe('<%= name %>s endpoint', function() {
 
     it('should update a <%= name %>', function(done) {
         request(app)
-            .put('/api/<%= name%>s/' + id + token)
+            .put('/api/<%= pluralName%>/' + id + token)
             .send({
                 string: 'Test string updated',
                 age: 22,
@@ -106,7 +106,7 @@ describe('<%= name %>s endpoint', function() {
 
     it('should get a <%= name %>', function(done) {
         request(app)
-            .get('/api/<%= name%>s/' + id + token)
+            .get('/api/<%= pluralName%>/' + id + token)
             .expect(200)
             .expect('Content-Type', /json/)
             .end(function(err, res) {
@@ -125,7 +125,7 @@ describe('<%= name %>s endpoint', function() {
 
     it('should delete a <%= name %>', function(done) {
         request(app)
-            .delete('/api/<%= name%>s/' + id + token)
+            .delete('/api/<%= pluralName%>/' + id + token)
             .expect(204)
             .end(function(err, res) {
                 if (err) {return done(err);}
